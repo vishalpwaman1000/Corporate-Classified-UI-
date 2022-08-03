@@ -1,0 +1,42 @@
+<mat-sidenav-container >
+    <mat-sidenav #sidenav (click)="closeProfile()">
+        <mat-toolbar color="primary">
+            <h1 class="md-toolbar-tools">Menu</h1>
+        </mat-toolbar>
+        <mat-nav-list>
+            <a *ngFor="let route of routes" mat-list-item [routerLink]="route.path" (click)="sidenav.toggle()"
+                class="nav_width">
+                <mat-icon class="custom_route_icon">{{route.icon}}</mat-icon>  {{route.label}}</a>
+
+                <a  mat-list-item  (click)="logout()"
+                class="nav_width">
+                <mat-icon class="custom_route_icon">logout</mat-icon> Logout </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button mat-icon-button aria-label="Menu"style="width:3%" (click)="sidenav.open()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="custom_heading"style="width:57%"(click)="closeProfile()"> Corporate Classifieds   </span>
+            <div class="d-flex justify-content-end align-items-end"style="width:40%">
+              <button mat-icon-button aria-label="My Profile" (click)="profileOpen()">
+                <mat-icon>account_circle</mat-icon>
+             </button>
+            </div>
+        </mat-toolbar>
+        <main class="custom_screen_height" (click)="closeProfile()">
+            <div class="height:100%;width:100%;">
+                <router-outlet></router-outlet>
+            </div>
+        </main>
+        <div *ngIf="showProfile" class="mt-2" style="padding: 4px; border-radius: 5px; position: absolute;top:50px;right:10px;z-index:100;background-color:white">
+            <h5 style="font-size: 15px;">User ID: {{userDetails?.userId}}</h5>
+            <h5 style="font-size: 15px;">Total Product: {{profileData?.totalProduct}}</h5>
+            <h5 style="font-size: 15px;">Total Points: {{profileData?.totalPoints}}</h5>
+            <h5 style="font-size: 15px;">Total Likes: {{profileData?.totalLikes}} </h5>
+        </div>
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>

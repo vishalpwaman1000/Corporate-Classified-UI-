@@ -1,0 +1,58 @@
+<div class="container mt-4">
+<div class="row">
+    <div class="col-md-8">
+        <form #product="ngForm" (ngSubmit)="formSubmit(product)">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Product Name</mat-label>
+                <input matInput placeholder="Enter Product Name" [(ngModel)]="productName" required name="productName" type="text">
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label> Product Description</mat-label>
+                <input matInput [(ngModel)]="productDescription" placeholder=" Product Description" required name="description" type="text">
+            </mat-form-field>
+        
+            <div class="row">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Product Condition</mat-label>
+                        <input matInput [(ngModel)]="productCondition" placeholder="Product Condition" required name="condition" type="text">
+                    </mat-form-field>
+                
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Category </mat-label>
+                    <input matInput [(ngModel)]="category" placeholder="Product Category" required name="productCategory" type="text">
+                </mat-form-field>
+            
+        </div>
+        
+            <div class="row">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Product Price</mat-label>
+                        <input matInput [(ngModel)]="productPrice" placeholder="Product Price " required name="productPrice" type="text">
+                    </mat-form-field>
+               
+            </div>
+            <mat-radio-group aria-label="Role"  name="status" ngModel class="w-100">
+                <div class="row">
+                    <div class="col">
+                        <mat-radio-button value="Available" >Available</mat-radio-button>
+                    </div>
+                    <div class="col">
+                        <mat-radio-button  value="Closed">Closed</mat-radio-button>
+                    </div>
+                </div>
+            </mat-radio-group>
+
+            <div class="d-flex flex-row align-items-center justify-content-between mt-3" *ngIf="!editFlag">
+                <button (click)="addProduct()" mat-stroked-button color="primary">Add Product</button>
+            </div>
+            <div class="d-flex flex-row align-items-center justify-content-between mt-3"*ngIf="editFlag">
+                <button  mat-stroked-button color="primary">Edit Product</button>
+            </div>
+        
+        </form>
+    </div>
+   </div>
+</div>

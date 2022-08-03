@@ -1,0 +1,85 @@
+
+<div class="container mt-4">
+    <mat-radio-group aria-label="Role"  name="status" ngModel class="w-100">
+        <div class="row">
+            <mat-form-field appearance="outline" class="w-50">
+                <mat-label>Enter Category</mat-label>
+                <input matInput [(ngModel)]="category" placeholder="Product Price " required name="productPrice" type="text">
+            </mat-form-field>
+       
+            <div class="col">
+                <mat-radio-button (change)="onCheckChange('category')" value="Closed">Offer By Category</mat-radio-button>
+            </div>
+            <div class="col">
+                <mat-radio-button (change)="onCheckChange('like')" value="Available">Offer By Top Likes</mat-radio-button>
+            </div>
+           
+        </div>
+    </mat-radio-group>
+
+<div class="row mt-4">
+    <div class="col-md-3 mb-4" *ngFor="let product of products">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title product_title">{{ product?.productName }}</h4>
+                <div class="cart-text product_description">
+                        {{ product?.productDescription }}
+                </div>
+                <div class="cart-text product_description">
+                    Employee Id:  {{ product?.employeeId }}
+                </div>
+                <div class="cart-text product_description">
+                    Status: {{ product?.status }}
+                 </div>
+                <div class="cart-text product_description">
+                    Category: {{ product?.category }}
+                 </div>
+                 <div class="cart-text product_description">
+                    Product Condition: {{ product?.productCondition }}
+                 </div>
+                 <div class="cart-text product_description">
+                    Opened Date: {{ product?.openedDate|date}}
+                   </div>
+                 <div class="cart-text product_description">
+                    Likes: {{ product?.likes }}
+                </div>
+                 <span class="product_price">
+                    <mat-icon class="price_icon_tag" matSuffix>sell</mat-icon>
+                    {{ product?.productPrice }}
+                </span>
+                <div class="row">
+                    <div class="col d-flex justify-content-center" *ngIf="admin||(product?.employeeId==loginUser)">
+                        <button (click)="delete(product.offerId)" onMoveToTrash mat-icon-button
+                            color="primary" aria-label="Example icon button with a home icon">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col d-flex justify-content-center"*ngIf="admin||(product?.employeeId==loginUser)">
+                        <button (click)="edit(product.offerId)" onMoveToTrash mat-icon-button
+                            color="primary" aria-label="Example icon button with a home icon">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col d-flex justify-content-center"*ngIf="(!(product?.employeeId==loginUser))&&(product?.status=='Available')">
+                        <button (click)="engage(product.offerId)" onMoveToTrash mat-icon-button
+                            color="primary" aria-label="Example icon button with a home icon">engage
+                        </button>
+                    </div>
+                    <div class="col d-flex justify-content-center"*ngIf="(product?.status=='Engaged')">
+                        <button  onMoveToTrash mat-icon-button
+                            color="secondary" aria-label="Example icon button with a home icon">engaged
+                        </button>
+                    </div>
+                   
+                    <div class="col d-flex justify-content-center" *ngIf="!(product?.employeeId==loginUser)">
+                        <button (click)="liked(product.offerId)" mat-icon-button color="primary"
+                            aria-label="Add to wishlist">
+                            <mat-icon>favorite</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
